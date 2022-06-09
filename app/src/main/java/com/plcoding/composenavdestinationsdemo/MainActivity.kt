@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.compose.rememberNavController
 import com.plcoding.composenavdestinationsdemo.destinations.PostScreenDestination
 import com.plcoding.composenavdestinationsdemo.destinations.ProfileScreenDestination
 import com.plcoding.composenavdestinationsdemo.ui.theme.ComposeNavDestinationsDemoTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.time.LocalDateTime
@@ -24,84 +24,86 @@ import java.time.LocalDateTime
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContent {
 
             ComposeNavDestinationsDemoTheme {
 
-
-                val navController = rememberNavController()
-
-
-                /*   //NAV HOST
-                   NavHost(
-                       navController = navController,
-                       startDestination = "login"
-                   ) {
-
-                       //1ST SCREEN COMPOSABLE
-                       composable("login") {
-
-
-                           LoginScreen(navController)
-                       }
-
-
-                       //2ND SCREEN COMPOSABLE
-                       composable(
-                           route = "profile/{name}/{userId}/{timestamp}",
-
-                               //argument 1
-                           arguments = listOf(
-                               navArgument("name") {
-                                   type = NavType.StringType
-                               },
-
-                                   //argument 2
-                               navArgument("userId") {
-                                   type = NavType.StringType
-                               },
-
-
-                                   //argument 3
-                               navArgument("timestamp") {
-                                   type = NavType.LongType
-                               },
-                           )
-                       ) {
-
-                           //Extracting NavArguments from NavBackStackEntry
-                           val name = it.arguments?.getString("name")!!
-                           val userId = it.arguments?.getString("userId")!!
-                           val timestamp = it.arguments?.getLong("timestamp")!!
-
-                           ProfileScreen(
-                               navController = navController,
-                               name = name,
-                               userId = userId,
-                               created = timestamp
-                           )
-                       }
-
-                       //3RD SCREEN COMPOSABLE
-                       composable("post/{showOnlyPostsByUser}", arguments = listOf(
-
-                               //argument 1
-                           navArgument("showOnlyPostsByUser") {
-                               type = NavType.BoolType
-                               defaultValue = false
-                           }
-                       )) {
-                           val showOnlyPostsByUser =
-                               it.arguments?.getBoolean("showOnlyPostsByUser") ?: false
-                           PostScreen(showOnlyPostsByUser)
-                       }
-                   }*/
+                //add the NavHost call
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }
 }
+
+
+/*  val navController = rememberNavController()
+
+
+//NAV HOST
+  NavHost(
+      navController = navController,
+      startDestination = "login"
+  ) {
+
+      //1ST SCREEN COMPOSABLE
+      composable("login") {
+
+
+          LoginScreen(navController)
+      }
+
+
+      //2ND SCREEN COMPOSABLE
+      composable(
+          route = "profile/{name}/{userId}/{timestamp}",
+
+              //argument 1
+          arguments = listOf(
+              navArgument("name") {
+                  type = NavType.StringType
+              },
+
+                  //argument 2
+              navArgument("userId") {
+                  type = NavType.StringType
+              },
+
+
+                  //argument 3
+              navArgument("timestamp") {
+                  type = NavType.LongType
+              },
+          )
+      ) {
+
+          //Extracting NavArguments from NavBackStackEntry
+          val name = it.arguments?.getString("name")!!
+          val userId = it.arguments?.getString("userId")!!
+          val timestamp = it.arguments?.getLong("timestamp")!!
+
+          ProfileScreen(
+              navController = navController,
+              name = name,
+              userId = userId,
+              created = timestamp
+          )
+      }
+
+      //3RD SCREEN COMPOSABLE
+      composable("post/{showOnlyPostsByUser}", arguments = listOf(
+
+              //argument 1
+          navArgument("showOnlyPostsByUser") {
+              type = NavType.BoolType
+              defaultValue = false
+          }
+      )) {
+          val showOnlyPostsByUser =
+              it.arguments?.getBoolean("showOnlyPostsByUser") ?: false
+          PostScreen(showOnlyPostsByUser)
+      }
+  }*/
+
 
 @Destination(start = true)
 @Composable
@@ -168,14 +170,12 @@ fun ProfileScreen(
         }
     }
 }
+
 @Destination
 @Composable
 fun PostScreen(
     showOnlyPostsByUser: Boolean = false
 ) {
-
-
-
 
 
     Box(
