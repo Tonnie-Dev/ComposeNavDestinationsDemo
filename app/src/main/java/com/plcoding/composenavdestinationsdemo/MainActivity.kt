@@ -31,16 +31,28 @@ import java.time.ZoneId
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
+
             ComposeNavDestinationsDemoTheme {
+
+
                 val navController = rememberNavController()
+
+
                 NavHost(
                     navController = navController,
                     startDestination = "login"
                 ) {
                     composable("login") {
+
+
                         LoginScreen(navController)
                     }
+
+
+
                     composable(
                         route = "profile/{name}/{userId}/{timestamp}",
                         arguments = listOf(
