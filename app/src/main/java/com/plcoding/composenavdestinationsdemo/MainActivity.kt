@@ -1,7 +1,6 @@
 package com.plcoding.composenavdestinationsdemo
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -14,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.plcoding.composenavdestinationsdemo.destinations.PostScreenDestination
+import com.plcoding.composenavdestinationsdemo.destinations.ProfileScreenDestination
 import com.plcoding.composenavdestinationsdemo.ui.theme.ComposeNavDestinationsDemoTheme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
 class MainActivity : ComponentActivity() {
@@ -107,7 +106,7 @@ class MainActivity : ComponentActivity() {
 @Destination(start = true)
 @Composable
 fun LoginScreen(
-   navigator: DestinationsNavigator
+    navigator: DestinationsNavigator
 ) {
     Column(
             modifier = Modifier.fillMaxSize(),
@@ -116,7 +115,15 @@ fun LoginScreen(
     ) {
         Text("Login Screen")
         Button(onClick = {
-
+            navigator.navigate(
+                    ProfileScreenDestination(
+                            user = User(
+                                    name = "Tonnie",
+                                    id = "13",
+                                    created = LocalDateTime.now()
+                            )
+                    )
+            )
         }) {
             Text("Go to Profile Screen")
         }
@@ -127,10 +134,12 @@ fun LoginScreen(
 @Destination
 @Composable
 fun ProfileScreen(
-    
-    navigator:DestinationsNavigator,
+        //  navController = navController,
+    navigator: DestinationsNavigator,
     user: User
 ) {
+
+
     /*val user = remember {
         User(
             name = name,
@@ -146,21 +155,29 @@ fun ProfileScreen(
             horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Profile Screen: $user", textAlign = TextAlign.Center)
+
+
         Button(onClick = {
-           // navController.navigate("post/true")
+
+            // navController.navigate("post/true")
+
+            //no arg passed
+            navigator.navigate(PostScreenDestination())
         }) {
             Text("Go to Post Screen")
         }
     }
 }
-
-
-
 @Destination
 @Composable
 fun PostScreen(
     showOnlyPostsByUser: Boolean = false
 ) {
+
+
+
+
+
     Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
