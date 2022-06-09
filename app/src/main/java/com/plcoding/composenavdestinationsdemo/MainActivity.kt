@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.plcoding.composenavdestinationsdemo.ui.theme.ComposeNavDestinationsDemoTheme
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
@@ -106,7 +107,7 @@ class MainActivity : ComponentActivity() {
 @Destination(start = true)
 @Composable
 fun LoginScreen(
-    navController: NavController
+   navigator: DestinationsNavigator
 ) {
     Column(
             modifier = Modifier.fillMaxSize(),
@@ -115,7 +116,7 @@ fun LoginScreen(
     ) {
         Text("Login Screen")
         Button(onClick = {
-            navController.navigate("profile/philipp/userid/123456789")
+
         }) {
             Text("Go to Profile Screen")
         }
@@ -126,7 +127,8 @@ fun LoginScreen(
 @Destination
 @Composable
 fun ProfileScreen(
-    navController: NavController,
+    
+    navigator:DestinationsNavigator,
     user: User
 ) {
     /*val user = remember {
@@ -145,19 +147,13 @@ fun ProfileScreen(
     ) {
         Text("Profile Screen: $user", textAlign = TextAlign.Center)
         Button(onClick = {
-            navController.navigate("post/true")
+           // navController.navigate("post/true")
         }) {
             Text("Go to Post Screen")
         }
     }
 }
 
-@Parcelize
-data class UserClass(
-    val name: String,
-    val id: String,
-    val created: LocalDateTime
-) : Parcelable
 
 
 @Destination
