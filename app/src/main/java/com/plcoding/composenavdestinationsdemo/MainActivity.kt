@@ -45,6 +45,8 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = "login"
                 ) {
+
+                    //1ST SCREEN COMPOSABLE
                     composable("login") {
 
 
@@ -52,21 +54,30 @@ class MainActivity : ComponentActivity() {
                     }
 
 
-
+                    //2ND SCREEN COMPOSABLE
                     composable(
                         route = "profile/{name}/{userId}/{timestamp}",
+
+                            //argument 1
                         arguments = listOf(
                             navArgument("name") {
                                 type = NavType.StringType
                             },
+
+                                //argument 2
                             navArgument("userId") {
                                 type = NavType.StringType
                             },
+
+
+                                //argument 3
                             navArgument("timestamp") {
                                 type = NavType.LongType
                             },
                         )
                     ) {
+
+                        //Extracting NavArguments from NavBackStackEntry
                         val name = it.arguments?.getString("name")!!
                         val userId = it.arguments?.getString("userId")!!
                         val timestamp = it.arguments?.getLong("timestamp")!!
@@ -78,7 +89,11 @@ class MainActivity : ComponentActivity() {
                             created = timestamp
                         )
                     }
+
+                    //3RD SCREEN COMPOSABLE
                     composable("post/{showOnlyPostsByUser}", arguments = listOf(
+
+                            //argument 1
                         navArgument("showOnlyPostsByUser") {
                             type = NavType.BoolType
                             defaultValue = false
