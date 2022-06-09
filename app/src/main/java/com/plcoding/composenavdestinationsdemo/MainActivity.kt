@@ -24,6 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.plcoding.composenavdestinationsdemo.ui.theme.ComposeNavDestinationsDemoTheme
+import com.ramcosta.composedestinations.annotation.Destination
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -109,7 +110,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+@Destination
 @Composable
 fun LoginScreen(
     navController: NavController
@@ -128,6 +129,8 @@ fun LoginScreen(
     }
 }
 
+
+@Destination
 @Composable
 fun ProfileScreen(
     navController: NavController,
@@ -158,6 +161,7 @@ fun ProfileScreen(
     }
 }
 
+@Destination
 @Composable
 fun PostScreen(
     showOnlyPostsByUser: Boolean = false
