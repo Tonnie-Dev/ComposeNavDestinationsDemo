@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
 
+             /*   //NAV HOST
                 NavHost(
                     navController = navController,
                     startDestination = "login"
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
                             it.arguments?.getBoolean("showOnlyPostsByUser") ?: false
                         PostScreen(showOnlyPostsByUser)
                     }
-                }
+                }*/
             }
         }
     }
